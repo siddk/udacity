@@ -50,7 +50,8 @@ template_form = """
 <form>
 <h2>Add a Food</h2>
 <input type="text" name="food">
-
+<input type="hidden">
+<button>Add</button>
 </form>
 """
 
@@ -60,7 +61,7 @@ class Handler(webapp2.RequestHandler):
 
 class MainHandler(Handler):
     def get(self):
-        self.write("Welcome to Sidd's Web Development Test Site for Udacity Course CS 253")
+        self.write("Welcome to Sidd's Site for the Udacity Web Development Course CS 253")
 
 class ROT13Handler(webapp2.RequestHandler):
     def rot13(self, cipher_text):
@@ -150,4 +151,8 @@ class WelcomeHandler(webapp2.RequestHandler):
         username = self.request.get('username')
         self.response.out.write("Welcome, %s!" % username)
 
-app = webapp2.WSGIApplication([('/', MainHandler), ('/unit2/rot13', ROT13Handler), ('/unit2/signup', SignupHandler), ('/unit2/welcome', WelcomeHandler)], debug=True)
+class TemplateHandler(Handler):
+    def get(self):
+        self.write(template_form)
+
+app = webapp2.WSGIApplication([('/', MainHandler), ('/unit2/rot13', ROT13Handler), ('/unit2/signup', SignupHandler), ('/unit2/welcome', WelcomeHandler), ('/unit3/templates', TemplateHandler)], debug=True)
