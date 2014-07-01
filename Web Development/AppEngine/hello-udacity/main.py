@@ -18,43 +18,6 @@ import webapp2
 import re
 import cgi
 
-rot_13_form = """
-<form method="post">
-    Enter text to be ROT13 Encrypted:
-    <br>
-
-    <textarea name="text">%(textarea)s</textarea>
-
-    <br>
-    <br>
-    <input type="submit">
-</form>
-"""
-
-signup_form = """
-<form method="post">
-    <h1>Signup</h1>
-    <label>Username <input type="text" name="username" value="%(user_val)s"></label>
-    <span style="color: red">%(user_error)s</span> <br>
-    <label>Password <input type="password" name="password" value="%(pass_val)s"></label>
-    <span style="color: red">%(pass_error)s</span> <br>
-    <label>Verify Password <input type="password" name="verify" value="%(verify_val)s"></label>
-    <span style="color: red">%(verify_error)s</span> <br>
-    <label>Email (optional) <input type="text" name="email" value="%(email_val)s"></label>
-    <span style="color: red">%(email_error)s</span> <br>
-    <input type="submit">
-</form>
-"""
-
-template_form = """
-<form>
-<h2>Add a Food</h2>
-<input type="text" name="food">
-<input type="hidden">
-<button>Add</button>
-</form>
-"""
-
 class Handler(webapp2.RequestHandler):
     def write(self, *a, **kw):
         self.response.out.write(*a, **kw)
@@ -88,6 +51,18 @@ class ROT13Handler(webapp2.RequestHandler):
     def post(self):
         input_text = self.request.get('text')
         self.write_form(input_text)
+rot_13_form = """
+<form method="post">
+    Enter text to be ROT13 Encrypted:
+    <br>
+
+    <textarea name="text">%(textarea)s</textarea>
+
+    <br>
+    <br>
+    <input type="submit">
+</form>
+"""
 
 class SignupHandler(webapp2.RequestHandler):
 
@@ -145,6 +120,20 @@ class SignupHandler(webapp2.RequestHandler):
                 return
 
         self.redirect("/unit2/welcome?username=%s" % cgi.escape(username, quote=True))
+signup_form = """
+<form method="post">
+    <h1>Signup</h1>
+    <label>Username <input type="text" name="username" value="%(user_val)s"></label>
+    <span style="color: red">%(user_error)s</span> <br>
+    <label>Password <input type="password" name="password" value="%(pass_val)s"></label>
+    <span style="color: red">%(pass_error)s</span> <br>
+    <label>Verify Password <input type="password" name="verify" value="%(verify_val)s"></label>
+    <span style="color: red">%(verify_error)s</span> <br>
+    <label>Email (optional) <input type="text" name="email" value="%(email_val)s"></label>
+    <span style="color: red">%(email_error)s</span> <br>
+    <input type="submit">
+</form>
+"""
 
 class WelcomeHandler(webapp2.RequestHandler):
     def get(self):
@@ -154,5 +143,27 @@ class WelcomeHandler(webapp2.RequestHandler):
 class TemplateHandler(Handler):
     def get(self):
         self.write(template_form)
+
+template_form = """
+<form>
+<h2>Add a Food</h2>
+<input type="text" name="food">
+%s
+<button>Add</button>
+</form>
+"""
+
+template_hidden = """
+<input type="hidden" name="food" value="%s">
+"""
+
+template_shopping_list = """
+<br>
+<br>
+<h2>Shopping List</h2>
+<ul>
+%s
+</u
+"""
 
 app = webapp2.WSGIApplication([('/', MainHandler), ('/unit2/rot13', ROT13Handler), ('/unit2/signup', SignupHandler), ('/unit2/welcome', WelcomeHandler), ('/unit3/templates', TemplateHandler)], debug=True)
