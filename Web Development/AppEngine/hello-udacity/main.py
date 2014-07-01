@@ -46,9 +46,21 @@ signup_form = """
 </form>
 """
 
-class MainHandler(webapp2.RequestHandler):
+template_form = """
+<form>
+<h2>Add a Food</h2>
+<input type="text" name="food">
+
+</form>
+"""
+
+class Handler(webapp2.RequestHandler):
+    def write(self, *a, **kw):
+        self.response.out.write(*a, **kw)
+
+class MainHandler(Handler):
     def get(self):
-        self.response.out.write("Welcome to Sidd's Web Development Test Site for Udacity Course CS 253")
+        self.write("Welcome to Sidd's Web Development Test Site for Udacity Course CS 253")
 
 class ROT13Handler(webapp2.RequestHandler):
     def rot13(self, cipher_text):
