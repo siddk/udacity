@@ -23,10 +23,6 @@ import cgi
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir))
 
-class MainHandler(Handler):
-    def get(self):
-        self.write("Welcome to Sidd's Site for the Udacity Web Development Course CS 253")
-
 class Handler(webapp2.RequestHandler):
     def write(self, *a, **kw):
         self.response.out.write(*a, **kw)
@@ -37,6 +33,10 @@ class Handler(webapp2.RequestHandler):
 
     def render(self, template, **kw):
         self.write(self.render_str(template, **kw))
+
+class MainHandler(Handler):
+    def get(self):
+        self.write("Welcome to Sidd's Site for the Udacity Web Development Course CS 253")
 
 class ROT13Handler(webapp2.RequestHandler):
     def rot13(self, cipher_text):
@@ -196,4 +196,9 @@ template_shopping_list = """
 </u
 """
 
-app = webapp2.WSGIApplication([('/', MainHandler), ('/unit2/rot13', ROT13Handler), ('/unit2/signup', SignupHandler), ('/unit2/welcome', WelcomeHandler), ('/unit3/hard_coded_templates', HardCodedTemplateHandler)], debug=True)
+class TemplateHandler(Handler):
+    def get(self):
+        # self.render('shopping_list.html')
+
+
+app = webapp2.WSGIApplication([('/', MainHandler), ('/unit2/rot13', ROT13Handler), ('/unit2/signup', SignupHandler), ('/unit2/welcome', WelcomeHandler), ('/unit3/hard_coded_templates', HardCodedTemplateHandler), ('/unit3/templates', TemplateHandler)], debug=True)
