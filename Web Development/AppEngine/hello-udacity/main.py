@@ -21,7 +21,7 @@ import re
 import cgi
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
-jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir))
+jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
 
 class Handler(webapp2.RequestHandler):
     def write(self, *a, **kw):
@@ -198,7 +198,8 @@ template_shopping_list = """
 
 class TemplateHandler(Handler):
     def get(self):
-        self.render('shopping_list.html')
+        items = self.request.get_all("food")
+        self.render('shopping_list.html', items = items)
 
 
 app = webapp2.WSGIApplication([('/', MainHandler), ('/unit2/rot13', ROT13Handler), ('/unit2/signup', SignupHandler), ('/unit2/welcome', WelcomeHandler), ('/unit3/hard_coded_templates', HardCodedTemplateHandler), ('/unit3/templates', TemplateHandler)], debug=True)
