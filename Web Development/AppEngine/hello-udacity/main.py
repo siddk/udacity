@@ -142,7 +142,22 @@ class WelcomeHandler(webapp2.RequestHandler):
 
 class TemplateHandler(Handler):
     def get(self):
-        self.write(template_form)
+        output = template_form
+        output_hidden = ""
+        output_items = ""
+
+        items = self.request.getall("food")
+        if items:
+            for item in items:
+                output_hidden += template_hidden % item
+                output_items += template_item % item
+
+            output_shopping = template_shopping_list % output_items
+            output += output_shopping
+
+        output = output % output_hidden
+
+        self.write(output)
 
 template_form = """
 <form>
@@ -155,6 +170,10 @@ template_form = """
 
 template_hidden = """
 <input type="hidden" name="food" value="%s">
+"""
+
+template_item = """
+<li>%s</li>
 """
 
 template_shopping_list = """
