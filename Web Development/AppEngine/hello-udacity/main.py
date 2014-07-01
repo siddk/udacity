@@ -15,6 +15,7 @@
 # limitations under the License.
 #
 import webapp2
+import jinja2
 import re
 import cgi
 
@@ -140,13 +141,13 @@ class WelcomeHandler(webapp2.RequestHandler):
         username = self.request.get('username')
         self.response.out.write("Welcome, %s!" % username)
 
-class TemplateHandler(Handler):
+class HardCodedTemplateHandler(Handler):
     def get(self):
         output = template_form
         output_hidden = ""
         output_items = ""
 
-        items = self.request.getall("food")
+        items = self.request.get_all("food")
         if items:
             for item in items:
                 output_hidden += template_hidden % item
@@ -158,7 +159,6 @@ class TemplateHandler(Handler):
         output = output % output_hidden
 
         self.write(output)
-
 template_form = """
 <form>
 <h2>Add a Food</h2>
@@ -185,4 +185,4 @@ template_shopping_list = """
 </u
 """
 
-app = webapp2.WSGIApplication([('/', MainHandler), ('/unit2/rot13', ROT13Handler), ('/unit2/signup', SignupHandler), ('/unit2/welcome', WelcomeHandler), ('/unit3/templates', TemplateHandler)], debug=True)
+app = webapp2.WSGIApplication([('/', MainHandler), ('/unit2/rot13', ROT13Handler), ('/unit2/signup', SignupHandler), ('/unit2/welcome', WelcomeHandler), ('/unit3/hard_coded_templates', HardCodedTemplateHandler)], debug=True)
