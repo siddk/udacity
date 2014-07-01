@@ -198,7 +198,7 @@ template_shopping_list = """
 
 class TemplateHandler(Handler):
     def get(self):
-        # self.render('shopping_list.html')
+        self.render('shopping_list.html')
 
 
 app = webapp2.WSGIApplication([('/', MainHandler), ('/unit2/rot13', ROT13Handler), ('/unit2/signup', SignupHandler), ('/unit2/welcome', WelcomeHandler), ('/unit3/hard_coded_templates', HardCodedTemplateHandler), ('/unit3/templates', TemplateHandler)], debug=True)
