@@ -19,5 +19,6 @@ Can inherit same base class across multiple handlers.
 Templates
 ---------
 A template library is a library to build complicated strings (html)
-For this udacity course we will be using --> Jinja2
-   Jinja2 is built into Google App Engine
+For this udacity course we will be using --> Jinja2.
+
+Jinja2 is built into Google App Engine
