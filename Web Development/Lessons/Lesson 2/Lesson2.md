@@ -3,10 +3,11 @@ Forms and Input
 HTML Form - manages input
 
 Example:
+    ```HTML
     <form>
         <input name="name">
     </form>
-
+    ```
 Input tag in the middle has attributes, one of which is "name"
 
 Form HTML
