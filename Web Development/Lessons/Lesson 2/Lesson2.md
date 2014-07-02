@@ -2,7 +2,6 @@
 HTML Form - manages input
 
 ######Example:######
-
 ```HTML
 <form>
     <input name="name">
@@ -12,7 +11,6 @@ HTML Form - manages input
 Input tag in the middle has attributes, one of which is "name"
 
 ##Form HTML##
-
 ```HTML
 <input type= "text" name="name"> - Creates a text field, with name=store
 <input type="submit"> - Creates a button for submission
