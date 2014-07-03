@@ -2,6 +2,16 @@ Lesson 1 - How the Web Works
 ============================
 HTML - Hyper Text Markup Language
 
+The solution to
+
+Evaluate the sum $\displaystyle\sum\limits_{i=0}^n i^3$
+
+\begin{align}
+2x^2 + 3(x-1)(x-2) & = 2x^2 + 3(x^2-3x+2)\\
+\nonumber &= 2x^2 + 3x^2 - 9x + 6\\
+&= 5x^2 - 9x + 6
+\end{align}
+
 Browser --> Internet --> HTTP Requests --> Servers
     -Servers will serve HTML files that will be rendered in your browser
 
