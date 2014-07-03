@@ -25,9 +25,9 @@ id | votes | user | date | title | url
 
 **User Table**
 
-id | name | date | password
---- | --- | --- | ---
-*21* | user123 | 12/1/12 | password
+| id   | name    | date    | password |
+| ---  | ---     | ---     | ---      |
+| *21* | user123 | 12/1/12 | password |
 
 Notice how the **User** field in the first table is a number. Basically, it is referring to the ID of a User in the User table. A lot of fields in databases are essentially references to IDs in other tables, and that is how relationships are stored, and easily found.
 
@@ -94,6 +94,12 @@ But, querying databases by hand has its downsides:
     - Tries to solve limitations of SQL databases
     - MongoDB
     - CouchDB
+
+
+##SQL
+**Structured Query Language**
+
+SQL was invented in the 1970. It was built to solve some of the problems with computer datastores of the time, and has now adapted to become a mainstay of web applications and industry.
 
 
 
