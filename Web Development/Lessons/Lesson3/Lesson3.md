@@ -70,3 +70,30 @@ links = [
 # a Link.
 ```
 
+###Downsides of Databases###
+A Database **Query** is essentially a statement that has the database look for a value. For example, a query for our links database above is ```"Find the number of votes for the link with id = 23."```
+
+But, querying databases by hand has its downsides:
+
+1. Error-prone
+2. Tedious
+3. Slow - especially with more data
+
+##Types of Databases##
+
+1. Relational (SQL)
+    - Postgresql - reddit, hipmunk
+    - MySQL - Facebook, everybody
+    - SQLite (Lightweight and simple)
+    - Oracle 
+2. Google App Engine's Datastore
+    - Similar to SQL databases
+3. Amazon's Dynamo
+    - Completely different from SQL
+4. NoSQL Databases
+    - Tries to solve limitations of SQL databases
+    - MongoDB
+    - CouchDB
+
+
+
