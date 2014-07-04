@@ -117,4 +117,15 @@ The above query breaks down in the following manner:
 ###Other SQL Commands###
 
 1. **ORDER BY** field **ASC**/**DESC** (ascending or descending)
-2. 
+2. **Join Query** - a type of SQL query across multiple tables that allows a cross-table conditional.
+    + Example: ```SELECT * FROM table1, table2 WHERE table1.field = table2.field AND table2.field = something;```
+3. **COUNT** --> ```SELECT COUNT(*) FROM table```
+4. **EXPLAIN** QUERY --> Provides a description of search process during execution of query.
+5. **ANALYZE** QUERY --> Gets fetch time, and necessary statistics
+
+###Indices###
+An index basically hashes a field, for a quicker lookup time. Works like a python dictionary (hash table). The command for building an index on a column in a SQL table is as follows:
+
+```SQL
+CREATE INDEX index_name on table.field;
+```
