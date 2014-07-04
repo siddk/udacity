@@ -101,5 +101,20 @@ But, querying databases by hand has its downsides:
 
 SQL was invented in the 1970. It was built to solve some of the problems with computer datastores of the time, and has now adapted to become a mainstay of web applications and industry.
 
+SQL is a way of structuring a query, or a command/question, for a relational databases (Postgres, MySQL, etc.). Like a programming language, it has it's own keywords, syntax, and structure.
 
+Here is a basic SQL query.
+```SQL
+SELECT * FROM table WHERE id = 5;
+```
 
+The above query breaks down in the following manner:
+
+1. **SELECT** *: Fetch all the column data for the following conditional
+2. **FROM** table: Specifies which table you are querying
+3. **WHERE** id = 5: Conditional statement --> Only select the data where id=5
+
+###Other SQL Commands###
+
+1. **ORDER BY** field **ASC**/**DESC** (ascending or descending)
+2. 
