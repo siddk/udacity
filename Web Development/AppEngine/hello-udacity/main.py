@@ -230,6 +230,11 @@ class AsciiChanHandler(Handler):
             self.render_page(title, art, error)
 
 # Blog
+class Post(db.Model):
+    subject = db.StringProperty(required = True)
+    post = db.TextProperty(required = True)
+    created = db.DateTimeProperty(auto_now_add = True)
+
 class BlogHandler(Handler):
     def render_page(self):
         self.render("blog.html")
@@ -246,13 +251,18 @@ class PostHandler(Handler):
 
     def post(self):
         subject = self.request.get("subject")
-        post = self.request.get("blog")
+        post = self.request.get("content")
 
         if subject and post:
-            pass
+            p = Post(subject = subject, post = post)
+            p_key = p.put()
         else:
             error = "We need both a subject and a post!"
             self.render_page(subject, post, error)
 
+class PermalinkHandler(Handler):
+    def get(self):
+        self.render_page()
 
-app = webapp2.WSGIApplication([('/', MainHandler), ('/unit2/rot13', ROT13Handler), ('/unit2/signup', SignupHandler), ('/unit2/welcome', WelcomeHandler), ('/unit3/hard_coded_templates', HardCodedTemplateHandler), ('/unit3/templates', TemplateHandler), ('/unit3/asciichan', AsciiChanHandler), ('/blog', BlogHandler), ('/blog/newpost', PostHandler)], debug=True)
+
+app = webapp2.WSGIApplication([('/', MainHandler), ('/unit2/rot13', ROT13Handler), ('/unit2/signup', SignupHandler), ('/unit2/welcome', WelcomeHandler), ('/unit3/hard_coded_templates', HardCodedTemplateHandler), ('/unit3/templates', TemplateHandler), ('/unit3/asciichan', AsciiChanHandler), ('/blog', BlogHandler), ('/blog/newpost', PostHandler), ('/blog/(\d+)', PermalinkHandler)], debug=True)
