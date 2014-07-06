@@ -202,12 +202,20 @@ class TemplateHandler(Handler):
         self.render('shopping_list.html', items = items)
 
 class AsciiChanHandler(Handler):
+    def render_page(self, title="", art="", error=""):
+        self.render("ascii.html", title = title, art = art, error = error)
+
     def get(self):
-        self.render("ascii.html")
+        self.render_page()
 
     def post(self):
         title = self.request.get("title")
         art = self.request.get("art")
 
+        if title and art:
+            self.write("Thanks!")
+        else:
+            error = "We need both a title and some artwork!"
+            self.render_page(title, art, error)
 
 app = webapp2.WSGIApplication([('/', MainHandler), ('/unit2/rot13', ROT13Handler), ('/unit2/signup', SignupHandler), ('/unit2/welcome', WelcomeHandler), ('/unit3/hard_coded_templates', HardCodedTemplateHandler), ('/unit3/templates', TemplateHandler), ('/unit3/asciichan', AsciiChanHandler)], debug=True)
