@@ -129,3 +129,29 @@ An index basically hashes a field, for a quicker lookup time. Works like a pytho
 ```SQL
 CREATE INDEX index_name on table.field;
 ```
+
+##Scaling Databases##
+There are really two reasons to scale a database.
+
+1. Too much load -> A lot of reads hitting the same database at the same time
+    + To remedy this, you can replicate your database, however many times
+    + Issues:
+        * No increase in write speed
+        * Replication lag
+2. Too much data -> Database is too big
+    + Shard the data -> store some data on each database, with multiple databases
+    + Essentially hash the keys in the key-value pairs, and store them in ranges in separate databases
+    + Issues:
+        * Complex queries
+        * Database joins become difficult
+
+For this Udacity course, the Google App Engine Datastore has the same limitations as the second Database scale. Complex queries, and joins are difficult/impossible to perform with the Datastore, though there is a provided SQL interface.
+
+##ACID##
+
+1. **Atomicity** - all parts of a transaction succeed or fail together
+    + A transaction is a set of command
+    + Basically, there will be no halfway in the execution of a transaction.
+2. **Consistency** - The database will always remain consistent (linked fields)
+3. **Isolation** - No transaction can interfere with another
+4. **Durability** - Once a transaction is committed, it won't be lost
