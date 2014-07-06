@@ -19,6 +19,7 @@ import jinja2
 import os
 import re
 import cgi
+from google.appengine.ext import db
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
@@ -201,6 +202,12 @@ class TemplateHandler(Handler):
         items = self.request.get_all("food")
         self.render('shopping_list.html', items = items)
 
+# ASCII Chan Project
+class Art(db.Model):
+    title = db.StringProperty(required = True)
+    art = db.TextProperty(required = True)
+    created = db.DateTimeProperty(auto_now_add = True)
+
 class AsciiChanHandler(Handler):
     def render_page(self, title="", art="", error=""):
         self.render("ascii.html", title = title, art = art, error = error)
@@ -213,9 +220,14 @@ class AsciiChanHandler(Handler):
         art = self.request.get("art")
 
         if title and art:
-            self.write("Thanks!")
+            a = Art(title = title, art = art)
+            a.put()
+
+            self.redirect("/unit3/asciichan")
         else:
             error = "We need both a title and some artwork!"
             self.render_page(title, art, error)
+
+
 
 app = webapp2.WSGIApplication([('/', MainHandler), ('/unit2/rot13', ROT13Handler), ('/unit2/signup', SignupHandler), ('/unit2/welcome', WelcomeHandler), ('/unit3/hard_coded_templates', HardCodedTemplateHandler), ('/unit3/templates', TemplateHandler), ('/unit3/asciichan', AsciiChanHandler)], debug=True)
