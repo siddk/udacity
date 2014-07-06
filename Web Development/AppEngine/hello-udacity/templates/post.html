@@ -62,6 +62,23 @@
             margin-bottom: 30px;
             text-decoration: none;
         }
+
+        .post + .post {
+            margin-top: 15px;
+        }
+
+        .post-heading {
+            position: relative;
+            border-bottom: 3px solid #666;
+        }
+
+        .post-title {
+            font-size: 24px;
+            font-weight: bold;
+
+            text-decoration: none;
+            color: #333;
+        }
     </style>
 
     <body>
@@ -73,13 +90,13 @@
             <h2>new post</h2>
             <label>
                 <div>subject</div>
-                <input type="text" name="subject">
+                <input type="text" name="subject" value = "{{subject}}">
             </label>
             <br>
 
             <label>
-                <div>ascii art</div>
-                <textarea name="art" value="{{art}}"></textarea>
+                <div>blog</div>
+                <textarea name="content" value = "{{post}}"></textarea>
             </label>
 
             <div class="error">{{error}}</div>
