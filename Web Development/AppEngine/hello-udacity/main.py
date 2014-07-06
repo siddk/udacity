@@ -237,7 +237,8 @@ class Post(db.Model):
 
 class BlogHandler(Handler):
     def render_page(self):
-        self.render("blog.html")
+        posts = db.GqlQuery("SELECT * FROM Post ORDER BY created DESC")
+        self.render("blog.html", posts = posts)
 
     def get(self):
         self.render_page()
@@ -256,6 +257,8 @@ class PostHandler(Handler):
         if subject and post:
             p = Post(subject = subject, post = post)
             p_key = p.put()
+
+            self.redirect("/blog/%d" % p_key.id())
         else:
             error = "We need both a subject and a post!"
             self.render_page(subject, post, error)
