@@ -201,5 +201,13 @@ class TemplateHandler(Handler):
         items = self.request.get_all("food")
         self.render('shopping_list.html', items = items)
 
+class AsciiChanHandler(Handler):
+    def get(self):
+        self.render("ascii.html")
 
-app = webapp2.WSGIApplication([('/', MainHandler), ('/unit2/rot13', ROT13Handler), ('/unit2/signup', SignupHandler), ('/unit2/welcome', WelcomeHandler), ('/unit3/hard_coded_templates', HardCodedTemplateHandler), ('/unit3/templates', TemplateHandler)], debug=True)
+    def post(self):
+        title = self.request.get("title")
+        art = self.request.get("art")
+
+
+app = webapp2.WSGIApplication([('/', MainHandler), ('/unit2/rot13', ROT13Handler), ('/unit2/signup', SignupHandler), ('/unit2/welcome', WelcomeHandler), ('/unit3/hard_coded_templates', HardCodedTemplateHandler), ('/unit3/templates', TemplateHandler), ('/unit3/asciichan', AsciiChanHandler)], debug=True)
