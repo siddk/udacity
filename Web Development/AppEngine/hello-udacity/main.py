@@ -211,7 +211,7 @@ class Art(db.Model):
 class AsciiChanHandler(Handler):
     def render_page(self, title="", art="", error=""):
         arts = db.GqlQuery("SELECT * FROM Art ORDER BY created DESC")
-        self.render("ascii.html", title = title, art = art, error = error)
+        self.render("ascii.html", title = title, art = art, error = error, arts = arts)
 
     def get(self):
         self.render_page()
@@ -228,6 +228,13 @@ class AsciiChanHandler(Handler):
         else:
             error = "We need both a title and some artwork!"
             self.render_page(title, art, error)
+
+class Blog(Handler):
+    def render_page(self):
+        self.render("blog.html")
+
+    def get(self):
+        self.render_page()
 
 
 
