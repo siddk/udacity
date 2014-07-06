@@ -263,9 +263,10 @@ class PostHandler(Handler):
             error = "We need both a subject and a post!"
             self.render_page(subject, post, error)
 
-class PermalinkHandler(Handler):
-    def get(self):
-        self.render_page()
+class PermalinkHandler(BlogHandler):
+    def get(self, post_id):
+        s = Post.get_by_id(int(post_id))
+        self.render("blog.html", posts = [s])
 
 
 app = webapp2.WSGIApplication([('/', MainHandler), ('/unit2/rot13', ROT13Handler), ('/unit2/signup', SignupHandler), ('/unit2/welcome', WelcomeHandler), ('/unit3/hard_coded_templates', HardCodedTemplateHandler), ('/unit3/templates', TemplateHandler), ('/unit3/asciichan', AsciiChanHandler), ('/blog', BlogHandler), ('/blog/newpost', PostHandler), ('/blog/(\d+)', PermalinkHandler)], debug=True)
