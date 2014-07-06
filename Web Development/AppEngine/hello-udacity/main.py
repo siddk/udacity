@@ -237,7 +237,12 @@ class BlogHandler(Handler):
     def get(self):
         self.render_page()
 
+class PostHandler(Handler):
+    def render_page(self):
+        self.render("post.html")
 
+    def get(self):
+        self.render_page()
 
 
 app = webapp2.WSGIApplication([('/', MainHandler), ('/unit2/rot13', ROT13Handler), ('/unit2/signup', SignupHandler), ('/unit2/welcome', WelcomeHandler), ('/unit3/hard_coded_templates', HardCodedTemplateHandler), ('/unit3/templates', TemplateHandler), ('/unit3/asciichan', AsciiChanHandler), ('/blog', BlogHandler)], debug=True)
