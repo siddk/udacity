@@ -210,6 +210,7 @@ class Art(db.Model):
 
 class AsciiChanHandler(Handler):
     def render_page(self, title="", art="", error=""):
+        arts = db.GqlQuery("SELECT * FROM Art ORDER BY created DESC")
         self.render("ascii.html", title = title, art = art, error = error)
 
     def get(self):
