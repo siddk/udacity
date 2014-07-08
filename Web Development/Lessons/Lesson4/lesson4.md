@@ -10,4 +10,4 @@
 + Cookies are instantiated in the HTTP Response, as a **Cookie-Header**
 + Set-Cookie: user-id = 12345 --> Response header
     * Note that Set-Cookie happens in HTTP Response
-    * You can fetch cookies in HTTP Request
+    * You can fetch cookies in HTTP Request: One header, with all cookie vals
