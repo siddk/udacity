@@ -20,6 +20,7 @@ import os
 import re
 import cgi
 from google.appengine.ext import db
+import hashlib
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
@@ -267,6 +268,19 @@ class PermalinkHandler(BlogHandler):
     def get(self, post_id):
         s = Post.get_by_id(int(post_id))
         self.render("blog.html", posts = [s])
+
+def hash_str(s):
+    return hashlib.md5(s).hexdigest()
+
+def make_secure_val(s):
+    return s + "," + hash_str(s)
+
+def check_secure_val(h):
+    splitr = h.split(',')
+    if (hash_str(splitr[0]) == splitr[1]):
+        return splitr[0]
+    else:
+        return None
 
 class CookieHandler(Handler):
     def get(self):
