@@ -280,6 +280,9 @@ class CookieHandler(Handler):
 
         self.response.headers.add_header('Set-Cookie', 'visits=%s' % visits)
 
-        self.write("You've been here %s times!" % visits)
+        if visits > 100000:
+            self.write("You are the best ever!")
+        else:
+            self.write("You've been here %s times!" % visits)
 
 app = webapp2.WSGIApplication([('/', MainHandler), ('/unit2/rot13', ROT13Handler), ('/unit2/signup', SignupHandler), ('/unit2/welcome', WelcomeHandler), ('/unit3/hard_coded_templates', HardCodedTemplateHandler), ('/unit3/templates', TemplateHandler), ('/unit3/asciichan', AsciiChanHandler), ('/blog', BlogHandler), ('/blog/newpost', PostHandler), ('/blog/(\d+)', PermalinkHandler), ('/cookies', CookieHandler)], debug=True)
