@@ -29,3 +29,5 @@ The domain is always key to handling cookies. In the above code, the domain is w
 
 If the question were which of these domains could actually set a cookie, the same would apply.
 
+##Hashing##
+
