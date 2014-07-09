@@ -124,6 +124,8 @@ class BlogWelcomeHandler(Handler):
                 self.render_page(user = u.user)
             else:
                 self.redirect('/blog/signup')
+        else:
+            self.redirect('/blog/signup')
 
 class BlogLoginHandler(Handler):
     def render_page(self, error = "", user_val = "", pass_val = ""):
