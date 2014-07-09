@@ -274,7 +274,7 @@ class CookieHandler(Handler):
         visits = self.request.cookies.get('visits', '0')
 
         if visits.isdigit():
-            visits += 1
+            visits = int(visits) + 1
         else:
             visits = 0
 
