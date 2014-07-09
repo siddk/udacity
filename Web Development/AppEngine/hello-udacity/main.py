@@ -299,7 +299,7 @@ class CookieHandler(Handler):
         self.response.headers.add_header('Set-Cookie', 'visits=%s' % new_cookie_val)
 
         # You can cheat this, by using the JS console, and just setting the cookie
-        # Update: With Hash, this is no longer the case
+        # Update: With new Hash, this is no longer the case
         if visits > 100000:
             self.write("You are the best ever!")
         else:
