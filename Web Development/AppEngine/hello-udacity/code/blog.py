@@ -111,7 +111,6 @@ class BlogSignupHandler(Handler):
         self.redirect("/blog/welcome")
 
 class BlogWelcomeHandler(Handler):
-
     def render_page(self, user = ""):
         self.render("welcome.html", user = user)
 
@@ -127,6 +126,30 @@ class BlogWelcomeHandler(Handler):
                 self.redirect('/blog/signup')
 
 class BlogLoginHandler(Handler):
+    def render_page(self, error = "", user_val = "", pass_val = ""):
+        self.render("login.html", error = error, user_val = user_val, pass_val = pass_val)
 
-    def render_page(self, error="")
+    def get(self):
+        self.render_page()
+
+    def post(self):
+        username = self.request.get('username')
+        password = self.request.get('password')
+
+        if not (user and password):
+            self.render_page(error = "Missing login info", user_val = username, pass_val = password)
+
+        users = db.GqlQuery("SELECT * FROM User")
+        for user in users:
+            if user.username == username:
+                pw = hashlib.sha256(password).hexdigest()
+
+                if user.pw == pw:
+                    u_id = str(user.id)
+                    sts = make_secure_val(u_id)
+                    self.response.headers.add_header('Set-Cookie', 'visited=%s; Path=/' % sts)
+                    self.redirect("/blog/welcome")
+
+                else:
+                    self.render_page(error = "Invalid login", user_val = username, pass_val = password)
 
