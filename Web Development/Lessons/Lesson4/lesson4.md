@@ -50,3 +50,13 @@ Note: For security purposes, don't write your own!
 4. sha256 - Pretty good 
     + Comparatively pretty slow
 
+###Hashing in Python###
+```python
+import hashlib
+
+x = hashlib.md5("foo!")
+print x # Returns <md5 HASH object @ memloc>
+
+x.hexdigest() # Returns the hex string '35a....737'
+```
+
