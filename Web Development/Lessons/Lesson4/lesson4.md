@@ -88,3 +88,7 @@ def check_secure_val(h):
     else:
         return None
 ```
+
+The issue with this is that this still is not secure. If a hacker can guess which hash we are using, it is trivial for them to get around this.
+
+In order to remedy this, we should do the following. Rather than hashing just the cookie string, and storing it as (string, hash(string)), we should instead store it as (string, hash(secret_string+string)), where secret_string is a special phrase that only we are privy to. Therefore, a hacker would have to know our password to get around this.
