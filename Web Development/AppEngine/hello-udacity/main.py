@@ -319,6 +319,8 @@ class BlogSignupHandler(Handler):
                     email_val=cgi.escape(email, quote=True))
                 return
 
+
+
 def make_salt():
     return ''.join(random.choice(string.letters) for x in xrange(5))
 
