@@ -5,6 +5,8 @@ Simple web application that creates an HTML form with four inputs, and implement
 escaping and error handling.
 """
 import webapp2
+import re
+import cgi
 
 class SignupHandler(webapp2.RequestHandler):
 
@@ -62,6 +64,12 @@ class SignupHandler(webapp2.RequestHandler):
                 return
 
         self.redirect("/unit2/welcome?username=%s" % cgi.escape(username, quote=True))
+
+class WelcomeHandler(webapp2.RequestHandler):
+    def get(self):
+        username = self.request.get('username')
+        self.response.out.write("Welcome, %s!" % username)
+
 signup_form = """
 <form method="post">
     <h1>Signup</h1>
