@@ -3,6 +3,12 @@ template.py
 
 Basic application that demonstrates the use of jinja2 templates.
 """
+import webapp2
+
+class TemplateHandler(Handler):
+    def get(self):
+        items = self.request.get_all("food")
+        self.render('shopping_list.html', items = items)
 
 class HardCodedTemplateHandler(Handler):
     def get(self):
@@ -23,33 +29,11 @@ class HardCodedTemplateHandler(Handler):
 
         self.write(output)
 
-template_form = """
-<form>
-<h2>Add a Food</h2>
-<input type="text" name="food">
-%s
-<button>Add</button>
-</form>
-"""
+template_form = """<form><h2>Add a Food</h2><input type="text" name="food">%s<button>Add</button></form>"""
 
-template_hidden = """
-<input type="hidden" name="food" value="%s">
-"""
+template_hidden = """<input type="hidden" name="food" value="%s">"""
 
-template_item = """
-<li>%s</li>
-"""
+template_item = """<li>%s</li>"""
 
-template_shopping_list = """
-<br>
-<br>
-<h2>Shopping List</h2>
-<ul>
-%s
-</u
-"""
+template_shopping_list = """<br><br><h2>Shopping List</h2><ul>%s</u"""
 
-class TemplateHandler(Handler):
-    def get(self):
-        items = self.request.get_all("food")
-        self.render('shopping_list.html', items = items)
