@@ -59,3 +59,9 @@ print x # Returns <md5 HASH object @ memloc>
 
 x.hexdigest() # Returns the hex string '35a....737'
 ```
+
+###Hashing Cookies###
+Here is the basic procedure of hashing a cookie:
+
+1. Set-Cookie: visits = 5, *hash* --> to browser 
+2. From browser --> Check that Hash of the value (5) == *hash*
