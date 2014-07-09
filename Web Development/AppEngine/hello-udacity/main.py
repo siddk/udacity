@@ -278,7 +278,7 @@ class CookieHandler(Handler):
         else:
             visits = 0
 
-        self.response.headers.add_header('Set-Cookies', 'visits=%s' % visits)
+        self.response.headers.add_header('Set-Cookie', 'visits=%s' % visits)
 
         self.write("You've been here %s times!" % visits)
 
