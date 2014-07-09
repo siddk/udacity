@@ -65,3 +65,16 @@ Here is the basic procedure of hashing a cookie:
 
 1. Set-Cookie: visits = 5, *hash* --> to browser 
 2. From browser --> Check that Hash of the value (5) == *hash*
+
+Sample implementation:
+
+```python
+import hashlib
+
+def hash_str(s):
+    return hashlib.md5(s).hexdigest()
+
+def make_secure_val(s):
+    return s + "," + hash_str(s)
+```
+We then feed the result of make_secure_val into our Set-Cookie function.
