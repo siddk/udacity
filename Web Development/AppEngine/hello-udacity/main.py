@@ -21,6 +21,7 @@ import re
 import cgi
 from google.appengine.ext import db
 import hashlib
+import hmac
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
@@ -269,16 +270,18 @@ class PermalinkHandler(BlogHandler):
         s = Post.get_by_id(int(post_id))
         self.render("blog.html", posts = [s])
 
+SECRET = 'imsosecret'
+
 def hash_str(s):
-    return hashlib.md5(s).hexdigest()
+    return hmac.new(SECRET, s).hexdigest()
 
 def make_secure_val(s):
-    return s + "|" + hash_str(s)
+    return "%s|%s" % (s, hash_str(s))
 
 def check_secure_val(h):
-    splitr = h.split('|')[0]
-    if (make_secure_val(splitr) == h):
-        return splitr
+    val = h.split('|')[0]
+    if h == make_secure_val(val):
+        return val
 
 class CookieHandler(Handler):
     def get(self):
@@ -296,6 +299,7 @@ class CookieHandler(Handler):
         self.response.headers.add_header('Set-Cookie', 'visits=%s' % new_cookie_val)
 
         # You can cheat this, by using the JS console, and just setting the cookie
+        # Update: With Hash, this is no longer the case
         if visits > 100000:
             self.write("You are the best ever!")
         else:
