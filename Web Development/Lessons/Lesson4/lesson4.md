@@ -38,3 +38,15 @@ A Hash is a function such that H(x) -> y. In this function, the parameter x is d
 + Infeasible to find x for a given y
 + Can't modify x without modifying y
 
+###Hash Algorithms###
+Note: For security purposes, don't write your own!
+
+1. crc32 - checksums, fast --> creates a hash of a large file
+    + Prone to collisions (two things hash to the same value)
+    + Main use-case is when speed is necessary
+2. md5 - fast, secure (not anymore)
+    + Very easy to reverse... given a y, you can find an input x that works very easily (collisions).
+3. sha1 - Secure(ish)
+4. sha256 - Pretty good 
+    + Comparatively pretty slow
+
