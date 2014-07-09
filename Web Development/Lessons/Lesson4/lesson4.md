@@ -30,4 +30,11 @@ The domain is always key to handling cookies. In the above code, the domain is w
 If the question were which of these domains could actually set a cookie, the same would apply.
 
 ##Hashing##
+A Hash is a function such that H(x) -> y. In this function, the parameter x is data (in our case, a string), but the output y is always a fixed length bit string (32 - 256 bits).
+
+**Properties of a Hashing Function:**
+
++ Difficult to generate a specific y
++ Infeasible to find x for a given y
++ Can't modify x without modifying y
 
