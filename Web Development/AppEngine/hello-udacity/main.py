@@ -271,8 +271,13 @@ class PermalinkHandler(BlogHandler):
 class CookieHandler(Handler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/plain'
-        visits = self.request.cookies.get('visits', 0)
-        visits += 1
+        visits = self.request.cookies.get('visits', '0')
+
+        if visits.isdigit():
+            visits += 1
+        else:
+            visits = 0
+
         self.response.headers.add_header('Set-Cookies', 'visits=%s' % visits)
 
         self.write("You've been here %s times!" % visits)
