@@ -4,6 +4,8 @@ cookie.py
 Sample web application to demonstrate basic cookie usage, hashing, and password
 protection.
 """
+from code.handler import Handler
+import hmac
 
 SECRET = 'imsosecret'
 

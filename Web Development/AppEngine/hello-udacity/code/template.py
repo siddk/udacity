@@ -4,6 +4,9 @@ template.py
 Basic application that demonstrates the use of jinja2 templates.
 """
 import webapp2
+import jinja2
+import os
+from code.handler import Handler
 
 class TemplateHandler(Handler):
     def get(self):

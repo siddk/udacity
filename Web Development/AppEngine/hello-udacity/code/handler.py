@@ -4,6 +4,12 @@ handler.py
 Core webapp2 handler class, responsible for creating a Request Handler, and implementing
 basic jinja2 rendering functions.
 """
+import webapp2
+import jinja2
+import os
+
+template_dir = os.path.join(os.path.dirname(__file__), '../templates')
+jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
 
 class Handler(webapp2.RequestHandler):
     def write(self, *a, **kw):
