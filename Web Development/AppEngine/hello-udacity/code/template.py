@@ -3,10 +3,10 @@ template.py
 
 Basic application that demonstrates the use of jinja2 templates.
 """
-import webapp2
+from code.handler import Handler
 import jinja2
 import os
-from code.handler import Handler
+import webapp2
 
 class TemplateHandler(Handler):
     def get(self):
