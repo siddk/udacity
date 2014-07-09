@@ -59,4 +59,3 @@ print x # Returns <md5 HASH object @ memloc>
 
 x.hexdigest() # Returns the hex string '35a....737'
 ```
-
