@@ -268,5 +268,8 @@ class PermalinkHandler(BlogHandler):
         s = Post.get_by_id(int(post_id))
         self.render("blog.html", posts = [s])
 
-
+class CookieHandler(Handler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/plain'
+        visits = self.request.cookies.get('visits', 0)
 app = webapp2.WSGIApplication([('/', MainHandler), ('/unit2/rot13', ROT13Handler), ('/unit2/signup', SignupHandler), ('/unit2/welcome', WelcomeHandler), ('/unit3/hard_coded_templates', HardCodedTemplateHandler), ('/unit3/templates', TemplateHandler), ('/unit3/asciichan', AsciiChanHandler), ('/blog', BlogHandler), ('/blog/newpost', PostHandler), ('/blog/(\d+)', PermalinkHandler)], debug=True)
