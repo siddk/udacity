@@ -276,11 +276,9 @@ def make_secure_val(s):
     return s + "|" + hash_str(s)
 
 def check_secure_val(h):
-    splitr = h.split('|')
-    if (hash_str(splitr[0]) == splitr[1]):
-        return splitr[0]
-    else:
-        return None
+    splitr = h.split('|')[0]
+    if (make_secure_val(splitr) == h):
+        return splitr
 
 class CookieHandler(Handler):
     def get(self):
