@@ -119,7 +119,7 @@ class BlogWelcomeHandler(Handler):
         if hash_input:
             cookie_val = check_secure_val(hash_input)
             if cookie_val:
-                uid = int(hash_input.split('|')[0])
+                uid = long(hash_input.split('|')[0])
                 u = User.get_by_id(uid)
                 self.render_page(user = u.user)
             else:
@@ -136,17 +136,18 @@ class BlogLoginHandler(Handler):
         username = self.request.get('username')
         password = self.request.get('password')
 
-        if not (user and password):
+        if not (username and password):
             self.render_page(error = "Missing login info", user_val = username, pass_val = password)
 
         users = db.GqlQuery("SELECT * FROM User")
         for user in users:
-            if user.username == username:
+            if user.user == username:
                 pw = hashlib.sha256(password).hexdigest()
 
                 if user.pw == pw:
-                    u_id = str(user.id)
-                    sts = make_secure_val(u_id)
+                    u_key = user.put()
+                    uid = str(u_key.id())
+                    sts = make_secure_val(uid)
                     self.response.headers.add_header('Set-Cookie', 'visited=%s; Path=/' % sts)
                     self.redirect("/blog/welcome")
 
