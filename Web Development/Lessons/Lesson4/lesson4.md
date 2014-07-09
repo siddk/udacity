@@ -94,3 +94,22 @@ The issue with this is that this still is not secure. If a hacker can guess whic
 In order to remedy this, we should do the following. Rather than hashing just the cookie string, and storing it as (string, hash(string)), we should instead store it as (string, hash(secret_string+string)), where secret_string is a special phrase that only we are privy to. Therefore, a hacker would have to know our password to get around this.
 
 We will be using the Python HMAC (Hash-based Message Authentication Code) Library, which has a constructor of the form ```hmac(secret, key, hash)```
+
+####Hashing with HMAC####
+This is the implementation for our new Hashing function.
+
+```python
+import hmac
+
+SECRET = 'imsosecret'
+def hash_str(s):
+    return hmac.new(SECRET, s).hexdigest()
+
+def make_secure_val(s):
+    return "%s|%s" % (s, hash_str(s))
+
+def check_secure_val(h):
+    val = h.split('|')[0]
+    if h == make_secure_val(val):
+        return val
+```
