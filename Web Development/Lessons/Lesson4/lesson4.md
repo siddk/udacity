@@ -113,3 +113,6 @@ def check_secure_val(h):
     if h == make_secure_val(val):
         return val
 ```
+
+####Password Hashing with Salts####
+Here is an implementation of Password hashing with Salts:
