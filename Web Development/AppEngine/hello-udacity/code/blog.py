@@ -126,3 +126,7 @@ class BlogWelcomeHandler(Handler):
             else:
                 self.redirect('/blog/signup')
 
+class BlogLoginHandler(Handler):
+
+    def render_page(self, error="")
+
