@@ -119,4 +119,10 @@ class BlogWelcomeHandler(Handler):
         hash_input = self.request.cookies.get("visited", '0')
         if hash_input:
             cookie_val = check_secure_val(hash_input)
+            if cookie_val:
+                uid = int(hash_input.split('|')[0])
+                u = User.get_by_id(uid)
+                self.render_page(user = u.user)
+            else:
+                self.redirect('/blog/signup')
 

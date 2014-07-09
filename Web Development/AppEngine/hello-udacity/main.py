@@ -18,4 +18,4 @@ class MainHandler(Handler):
     def get(self):
         self.write("Welcome to Sidd's Site for the Udacity Web Development Course CS 253")
 
-app = webapp2.WSGIApplication([('/', MainHandler), ('/unit2/rot13', ROT13Handler), ('/unit2/signup', SignupHandler), ('/unit2/welcome', WelcomeHandler), ('/unit3/hard_coded_templates', HardCodedTemplateHandler), ('/unit3/templates', TemplateHandler), ('/unit3/asciichan', AsciiChanHandler), ('/blog', BlogHandler), ('/blog/newpost', PostHandler), ('/blog/(\d+)', PermalinkHandler), ('/blog/signup', BlogSignupHandler), ('/cookies', CookieHandler)], debug=True)
+app = webapp2.WSGIApplication([('/', MainHandler), ('/unit2/rot13', ROT13Handler), ('/unit2/signup', SignupHandler), ('/unit2/welcome', WelcomeHandler), ('/unit3/hard_coded_templates', HardCodedTemplateHandler), ('/unit3/templates', TemplateHandler), ('/unit3/asciichan', AsciiChanHandler), ('/blog', BlogHandler), ('/blog/newpost', PostHandler), ('/blog/(\d+)', PermalinkHandler), ('/blog/signup', BlogSignupHandler), ('/blog/welcome', BlogWelcomeHandler), ('/cookies', CookieHandler)], debug=True)
