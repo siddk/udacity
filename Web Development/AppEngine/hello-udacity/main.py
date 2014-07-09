@@ -273,6 +273,7 @@ class PermalinkHandler(BlogHandler):
         self.render("blog.html", posts = [s])
 
 class BlogSignupHandler(Handler):
+
     def render_page(self, user_error="", pass_error="", verify_error="", email_error="",
                     user_val="", pass_val="", verify_val="", email_val=""):
         self.render("signup.html", user_error = user_error, pass_error = pass_error, verify_error = verify_error, email_error = email_error, user_val = user_val, pass_val = pass_val, verify_val = verify_val, email_val = email_val)
@@ -319,24 +320,18 @@ class BlogSignupHandler(Handler):
                     email_val=cgi.escape(email, quote=True))
                 return
 
-        u = User(username, password)
+        u = User(user = username, pw = hashlib.sha256(password).hexdigest())
+        u_key = u.put()
+        u_id = u_key.id()
+
+        sts = make_secure_val(u_id)
+        self.response.headers.add_header('Set-Cookie', 'visited=%s; Path=/' % sts)
+        self.redirect("/blog/welcome")
 
 class User(db.Model):
     user = db.StringProperty(required = True)
     pw = db.StringProperty(required = True)
 
-def make_salt():
-    return ''.join(random.choice(string.letters) for x in xrange(5))
-
-def make_pw_hash(name, pw, salt = None):
-    if not salt:
-        salt = make_salt()
-    h = hashlib.sha256(name + pw + salt).hexdigest()
-    return '%s,%s' % (h, salt)
-
-def valid_pw(name, pw, h):
-    salt = h.split(',')[1]
-    return h == make_pw_hash(name, pw, salt)
 
 
 SECRET = 'imsosecret'
