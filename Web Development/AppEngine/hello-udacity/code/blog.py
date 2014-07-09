@@ -153,4 +153,3 @@ class BlogLoginHandler(Handler):
 
                 else:
                     self.render_page(error = "Invalid login", user_val = username, pass_val = password)
-
