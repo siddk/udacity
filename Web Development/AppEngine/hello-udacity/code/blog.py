@@ -111,5 +111,12 @@ class BlogSignupHandler(Handler):
         self.redirect("/blog/welcome")
 
 class BlogWelcomeHandler(Handler):
-    pass
+
+    def render_page(self, user = ""):
+        self.render("welcome.html", user = user)
+
+    def get(self):
+        hash_input = self.request.cookies.get("visited", '0')
+        if hash_input:
+            cookie_val = check_secure_val(hash_input)
 
