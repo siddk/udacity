@@ -11,6 +11,8 @@
 + Set-Cookie: user-id = 12345 --> Response header
     * Note that Set-Cookie happens in HTTP Response
     * You can fetch cookies in HTTP Request: One header, with all cookie vals
++ Cookies also may have an Expiration parameter, which sets an expiration date
+    * A "Session" Cookie has no expires
 
 ###Cookie-Domains###
 Format of a Set-Cookie header is as follows:
