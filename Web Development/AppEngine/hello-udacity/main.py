@@ -6,7 +6,7 @@ Renders a webapp2 web application, for the Udacity Web Development Course CS 253
 Built on Google App Engine, with jinja2 templating, and a SQLite backend.
 """
 from code.ascii import AsciiChanHandler
-from code.blog import BlogHandler, PostHandler, PermalinkHandler, BlogSignupHandler
+from code.blog import BlogHandler, PostHandler, PermalinkHandler, BlogSignupHandler, BlogWelcomeHandler
 from code.cookie import CookieHandler
 from code.handler import Handler
 from code.rot13 import ROT13Handler
