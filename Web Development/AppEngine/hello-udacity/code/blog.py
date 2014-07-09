@@ -4,12 +4,12 @@ blog.py
 Pinnacle project of the Udacity Web Development Course CS 253. Implements a fully
 functional blog using webapp2, built on Google App Engine, with a SQLite backend.
 """
-from google.appengine.ext import db
+from code.cookie import make_secure_val, check_secure_val
 from code.handler import Handler
-import re
+from google.appengine.ext import db
 import cgi
 import hashlib
-from code.cookie import make_secure_val, check_secure_val
+import re
 
 class Post(db.Model):
     subject = db.StringProperty(required = True)

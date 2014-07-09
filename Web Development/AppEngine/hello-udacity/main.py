@@ -5,14 +5,14 @@ main.py
 Renders a webapp2 web application, for the Udacity Web Development Course CS 253.
 Built on Google App Engine, with jinja2 templating, and a SQLite backend.
 """
-import webapp2
+from code.ascii import AsciiChanHandler
+from code.blog import BlogHandler, PostHandler, PermalinkHandler, BlogSignupHandler
+from code.cookie import CookieHandler
+from code.handler import Handler
 from code.rot13 import ROT13Handler
 from code.signup_error import SignupHandler, WelcomeHandler
 from code.template import TemplateHandler, HardCodedTemplateHandler
-from code.ascii import AsciiChanHandler
-from code.handler import Handler
-from code.blog import BlogHandler, PostHandler, PermalinkHandler, BlogSignupHandler
-from code.cookie import CookieHandler
+import webapp2
 
 class MainHandler(Handler):
     def get(self):

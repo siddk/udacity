@@ -4,9 +4,9 @@ signup_error.py
 Simple web application that creates an HTML form with four inputs, and implements basic
 escaping and error handling.
 """
-import webapp2
-import re
 import cgi
+import re
+import webapp2
 
 class SignupHandler(webapp2.RequestHandler):
     def write_form(self, user_error="", pass_error="", verify_error="", email_error="",
