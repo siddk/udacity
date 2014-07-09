@@ -54,7 +54,6 @@ class PermalinkHandler(BlogHandler):
         self.render("blog.html", posts = [s])
 
 class BlogSignupHandler(Handler):
-
     def render_page(self, user_error="", pass_error="", verify_error="", email_error="",
                     user_val="", pass_val="", verify_val="", email_val=""):
         self.render("signup.html", user_error = user_error, pass_error = pass_error, verify_error = verify_error, email_error = email_error, user_val = user_val, pass_val = pass_val, verify_val = verify_val, email_val = email_val)
