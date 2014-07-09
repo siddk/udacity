@@ -319,7 +319,11 @@ class BlogSignupHandler(Handler):
                     email_val=cgi.escape(email, quote=True))
                 return
 
+        u = User(username, password)
 
+class User(db.Model):
+    user = db.StringProperty(required = True)
+    pw = db.StringProperty(required = True)
 
 def make_salt():
     return ''.join(random.choice(string.letters) for x in xrange(5))
