@@ -272,4 +272,9 @@ class CookieHandler(Handler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/plain'
         visits = self.request.cookies.get('visits', 0)
-app = webapp2.WSGIApplication([('/', MainHandler), ('/unit2/rot13', ROT13Handler), ('/unit2/signup', SignupHandler), ('/unit2/welcome', WelcomeHandler), ('/unit3/hard_coded_templates', HardCodedTemplateHandler), ('/unit3/templates', TemplateHandler), ('/unit3/asciichan', AsciiChanHandler), ('/blog', BlogHandler), ('/blog/newpost', PostHandler), ('/blog/(\d+)', PermalinkHandler)], debug=True)
+        visits += 1
+        self.response.headers.add_header('Set-Cookies', 'visits=%s' % visits)
+
+        self.write("You've been here %s times!" % visits)
+
+app = webapp2.WSGIApplication([('/', MainHandler), ('/unit2/rot13', ROT13Handler), ('/unit2/signup', SignupHandler), ('/unit2/welcome', WelcomeHandler), ('/unit3/hard_coded_templates', HardCodedTemplateHandler), ('/unit3/templates', TemplateHandler), ('/unit3/asciichan', AsciiChanHandler), ('/blog', BlogHandler), ('/blog/newpost', PostHandler), ('/blog/(\d+)', PermalinkHandler), ('/cookies', CookieHandler)], debug=True)
