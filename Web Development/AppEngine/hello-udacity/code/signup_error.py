@@ -9,7 +9,6 @@ import re
 import cgi
 
 class SignupHandler(webapp2.RequestHandler):
-
     def write_form(self, user_error="", pass_error="", verify_error="", email_error="",
                     user_val="", pass_val="", verify_val="", email_val=""):
         self.response.out.write(signup_form % ({"user_error": user_error,
