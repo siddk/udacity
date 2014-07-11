@@ -103,5 +103,11 @@ def total_ups():
 ```
 
 ####JSON Escaping####
-Just like with HTML inputs, it is necessary to escape JSON.
+Just like with HTML inputs, it is necessary to escape JSON. Standard errors involve (") in the middle of strings.
 
+To fix this, parse the JSON string, then escape the " with a \" in the string.
+
+###JSON Writing###
+The JSON dumps function will take any python object, and return the JSON representation. 
+
+JSON dumps is really neat because it self-escapes quotes.
