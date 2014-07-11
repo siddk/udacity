@@ -18,3 +18,26 @@ headers = x.headers
 # headers -> <httplib.HTTPMessage instance at 0x102a7e830>
 server = headers['server']
 # server -> ECS (rhv/818F)
+```
+
+##How Computers Communicate##
+A basic manner of communication is to treat the server making the requests like a browser, and make HTTP requests to another server, and get the HTML from the other server. This is suboptimal and error-prone, as it requires one to parse the HTML.
+
+The best manner of communication, is through **XML**
+
+###XML###
+Structured with tags, like HTML, but a little more consistent, and easier to parse.
+
+```XML
+<?xml version="1.0" encoding="UTF-8"?>
+<results>
+  <itinerary>
+    <leg>
+      <origin>CUS</origin>
+      <dest>WAS</dest>
+    </leg>
+  </itinerary>
+</results>
+```
+
+Essentially, all HTML can be expressed in XML, and XML and HTML share a common lineage.
