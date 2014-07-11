@@ -37,6 +37,7 @@ def get_coords(ip):
 class AsciiChanHandler(Handler):
     def render_page(self, title="", art="", error=""):
         arts = db.GqlQuery("SELECT * FROM Art ORDER BY created DESC LIMIT 10")
+        arts = list(arts)
 
         # Find which arts have coords
         points = []
