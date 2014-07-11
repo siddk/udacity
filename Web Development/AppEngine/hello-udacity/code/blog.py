@@ -53,7 +53,8 @@ class JSONHandler(Handler):
     def get(self):
         posts = db.GqlQuery("SELECT * FROM Post")
         lst = [{"subject": x.subject, "content": x.post for x in posts}]
-        dumpFile = json.dumps(lst)
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.out.write(json.dumps(lst))
 
 
 class PermalinkHandler(BlogHandler):
