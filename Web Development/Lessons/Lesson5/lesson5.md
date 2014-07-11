@@ -76,4 +76,28 @@ len(lst) # Returns 25
 ```
 
 ##JSON##
-JSON, like XML, is an human-friendly and computer-friendly way to represent data. JSON stands for JavaScript Object Notation. Stores things in dictionaries (dicts like python), and everything is denoted with nesting pairs of curly braces, and key-value pairs.
+JSON, like XML, is an human-friendly and computer-friendly way to represent data. JSON stands for JavaScript Object Notation. Stores things in dictionaries (dicts like python), and everything is denoted with nesting pairs of curly braces, and key-value pairs. Anything you can express in XML can be expressed in JSON, without the unnecessary tags.
+
+###Parsing JSON with Python###
+
+```python
+import json
+j = '{"one": 1, "numbers": [1,2,3.5]}'
+json.loads(j) # Returns a python dictionary
+
+d = json.loads(j)
+d['numbers'] # Returns [1, 2, 3.5]
+
+# Reddit Example
+reddit_front = ... # Json string
+# Inside the JSON is a series of links, each with an "up" attribute. Find the total number of ups of all the links.
+
+def total_ups():
+    parsed = json.loads(reddit_front)
+    x = parsed['data']
+    x = x['children']
+    count = 0
+    for i in x:
+        count += int(i['data']['ups'])
+    return count
+```
