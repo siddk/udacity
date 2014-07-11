@@ -54,3 +54,10 @@ from xml.dom import minidom
 x = minidom.parseString("<mytag>...</mytag>") # Returns an xml document object
 x.getElementsByTagName("tagname")[0].childNodes[0].nodeValue
 # ^-- This is how we parse XML... the above example gets the value of the first object of the first child of the tag "tagname." 
+```
+
+##RSS##
+RDF Site Summary, where RDF stands for Resource Description Framework.
+More popularly, RSS is referred to as Really Simple Syndication.
+
+An RSS is a giant XML document, holding a series of items and descriptions.
