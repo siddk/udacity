@@ -60,4 +60,8 @@ x.getElementsByTagName("tagname")[0].childNodes[0].nodeValue
 RDF Site Summary, where RDF stands for Resource Description Framework.
 More popularly, RSS is referred to as Really Simple Syndication.
 
-An RSS is a giant XML document, holding a series of items and descriptions.
+An RSS is a giant XML document, holding a series of items and descriptions. The following is an example of parsing out the number of items in an RSS XML document.
+
+```python
+import urllib2
+from xml.dom import minidom
