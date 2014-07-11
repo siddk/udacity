@@ -12,3 +12,9 @@ p = urllib2.urlopen("http://www.google.com") # Creates a file object (can read)
 c = p.read() # HTTP Response
 
 # Example: Find the server www.example.com uses
+x = urllib2.urlopen("http://example.com")
+# x -> <addinfourl at 4339525968 whose fp = <socket._fileobject object at 0x102a66450>>
+headers = x.headers
+# headers -> <httplib.HTTPMessage instance at 0x102a7e830>
+server = headers['server']
+# server -> ECS (rhv/818F)
