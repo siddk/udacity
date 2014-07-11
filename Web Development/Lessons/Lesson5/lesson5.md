@@ -101,3 +101,7 @@ def total_ups():
         count += int(i['data']['ups'])
     return count
 ```
+
+####JSON Escaping####
+Just like with HTML inputs, it is necessary to escape JSON.
+
