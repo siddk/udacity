@@ -65,3 +65,12 @@ An RSS is a giant XML document, holding a series of items and descriptions. The 
 ```python
 import urllib2
 from xml.dom import minidom
+
+# Get number of elements at the following url
+p = urllib2.urlopen("http://www.nytimes.com/services/xml/rss/nyt/GlobalHome.xml")
+xml_string = p.read()
+parse = minidom.parseString(xml_string)
+
+lst = parse.getElementsByTagName("item")
+len(lst) # Returns 25
+```
