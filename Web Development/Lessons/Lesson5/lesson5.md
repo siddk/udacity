@@ -11,4 +11,4 @@ import urllib2
 p = urllib2.urlopen("http://www.google.com") # Creates a file object (can read)
 c = p.read() # HTTP Response
 
-dir(p) #Examines p, returns available fields
+# Example: Find the server www.example.com uses
