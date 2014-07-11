@@ -47,8 +47,7 @@ class AsciiChanHandler(Handler):
 
         if title and art:
             a = Art(title = title, art = art)
-            # Lookup user's coordinates from their IP
-            # If we have coordinates, add them to Art
+            coords = get_coords(self.request.remote_addr)
             a.put()
 
             self.redirect("/unit3/asciichan")
