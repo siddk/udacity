@@ -78,6 +78,9 @@
             <input type="submit">
         </form>
 
+        {% if img_url %}
+            <img src="{{img_url}}">
+        {% endif %}
         <hr>
         {% for art in arts %}
             <div class = "art">
