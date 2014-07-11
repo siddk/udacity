@@ -48,3 +48,9 @@ There are thousands of XML parsers, and we will be using the minidom (xml.dom)li
 **DOM** stands for *Document Object Model*, refers to the document as an object that you will be messing with programmatically.
 
 **MINIDOM Example**
+```python
+from xml.dom import minidom
+# minidom.parseString() --> Function that parses an XML string
+x = minidom.parseString("<mytag>...</mytag>") # Returns an xml document object
+x.getElementsByTagName("tagname")[0].childNodes[0].nodeValue
+# ^-- This is how we parse XML... the above example gets the value of the first object of the first child of the tag "tagname." 
