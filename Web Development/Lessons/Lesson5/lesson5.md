@@ -111,3 +111,10 @@ To fix this, parse the JSON string, then escape the " with a \" in the string.
 The JSON dumps function will take any python object, and return the JSON representation. 
 
 JSON dumps is really neat because it self-escapes quotes.
+
+##ASCII Chan API##
+We will be updating out ASCII Chan project from Unit 3, to include a map of submission locations on the front page.
+
+We will be using the following two APIs:
+    1. Request IP -> Coordinates: **hostip.info**
+    2. Draw a map --> **Google Maps Static Map API**
