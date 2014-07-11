@@ -33,6 +33,13 @@ def get_coords(ip):
             c = cord.split(',')
             return db.GeoPt(c[1], c[0])
 
+GMAPS_URL = "http://maps.googleapis.com/maps/api/staticmap?size=380x263&sensor=false&"
+def gmaps_img(points):
+    temp_url = GMAPS_URL
+    for point in points:
+        temp_url += "markers=%s,%s&" % (str(point.lat), str(point.lon))
+    temp_url = temp_url[:-1]
+    return temp_url
 
 class AsciiChanHandler(Handler):
     def render_page(self, title="", art="", error=""):
@@ -45,8 +52,11 @@ class AsciiChanHandler(Handler):
             if arts.coords:
                 points.append(a.coords)
 
+        img_url = None
+        if points:
+            img_url = gmaps_img(points):
 
-        self.render("ascii.html", title = title, art = art, error = error, arts = arts)
+        self.render("ascii.html", title = title, art = art, error = error, arts = arts, img_url = img_url)
 
     def get(self):
         self.render_page()
