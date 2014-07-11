@@ -65,7 +65,10 @@ class PermalinkHandler(BlogHandler):
 
 class PermalinkJSONHandler(Handler):
     def get(self, post_id):
-        self.response.out.write("HELLO")
+        s = Post.get_by_id(int(post_id))
+        js = {"subject": s.subject, "content": s.post}
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.out.write(json.dumps(js))
 
 class BlogSignupHandler(Handler):
     def render_page(self, user_error="", pass_error="", verify_error="", email_error="",
