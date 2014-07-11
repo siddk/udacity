@@ -52,7 +52,7 @@ class PostHandler(Handler):
 class JSONHandler(Handler):
     def get(self):
         posts = db.GqlQuery("SELECT * FROM Post")
-        lst = [{"subject": x.subject, "content": x.post} for x in posts}]
+        lst = [{"subject": x.subject, "content": x.post} for x in posts]
         self.response.headers['Content-Type'] = 'application/json'
         self.response.out.write(json.dumps(lst))
 
@@ -61,6 +61,11 @@ class PermalinkHandler(BlogHandler):
     def get(self, post_id):
         s = Post.get_by_id(int(post_id))
         self.render("blog.html", posts = [s])
+
+
+class PermalinkJSONHandler(Handler):
+    def get(self, post_id):
+        self.response.out.write("HELLO")
 
 class BlogSignupHandler(Handler):
     def render_page(self, user_error="", pass_error="", verify_error="", email_error="",
