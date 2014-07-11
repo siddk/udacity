@@ -8,6 +8,7 @@ from code.cookie import make_secure_val, check_secure_val
 from code.handler import Handler
 from google.appengine.ext import db
 import cgi
+import json
 import hashlib
 import re
 
@@ -50,8 +51,8 @@ class PostHandler(Handler):
 
 class JSONHandler(Handler):
     def get(self):
-        biglist = []
         posts = db.GqlQuery("SELECT * FROM Post")
+        lst = [{"subject": x.subject, "content": x.post for x in posts}]
 
 
 class PermalinkHandler(BlogHandler):
