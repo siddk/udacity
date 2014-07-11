@@ -49,12 +49,12 @@ class AsciiChanHandler(Handler):
         # Find which arts have coords
         points = []
         for a in arts:
-            if arts.coords:
+            if a.coords:
                 points.append(a.coords)
 
         img_url = None
         if points:
-            img_url = gmaps_img(points):
+            img_url = gmaps_img(points)
 
         self.render("ascii.html", title = title, art = art, error = error, arts = arts, img_url = img_url)
 
