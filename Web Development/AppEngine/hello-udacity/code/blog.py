@@ -48,6 +48,12 @@ class PostHandler(Handler):
             error = "We need both a subject and a post!"
             self.render_page(subject, post, error)
 
+class JSONHandler(Handler):
+    def get(self):
+        biglist = []
+        posts = db.GqlQuery("SELECT * FROM Post")
+
+
 class PermalinkHandler(BlogHandler):
     def get(self, post_id):
         s = Post.get_by_id(int(post_id))
