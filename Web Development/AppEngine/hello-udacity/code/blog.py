@@ -52,7 +52,7 @@ class PostHandler(Handler):
 class JSONHandler(Handler):
     def get(self):
         posts = db.GqlQuery("SELECT * FROM Post")
-        lst = [{"subject": x.subject, "content": x.post for x in posts}]
+        lst = [{"subject": x.subject, "content": x.post} for x in posts}]
         self.response.headers['Content-Type'] = 'application/json'
         self.response.out.write(json.dumps(lst))
 
