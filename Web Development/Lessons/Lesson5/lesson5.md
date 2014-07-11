@@ -74,3 +74,6 @@ parse = minidom.parseString(xml_string)
 lst = parse.getElementsByTagName("item")
 len(lst) # Returns 25
 ```
+
+##JSON##
+JSON, like XML, is an human-friendly and computer-friendly way to represent data. JSON stands for JavaScript Object Notation. Stores things in dictionaries (dicts like python), and everything is denoted with nesting pairs of curly braces, and key-value pairs.
