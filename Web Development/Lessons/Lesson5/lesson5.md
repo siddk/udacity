@@ -41,3 +41,10 @@ Structured with tags, like HTML, but a little more consistent, and easier to par
 ```
 
 Essentially, all HTML can be expressed in XML, and XML and HTML share a common lineage.
+
+###Parsing XML###
+There are thousands of XML parsers, and we will be using the minidom (xml.dom)library in Python. 
+
+**DOM** stands for *Document Object Model*, refers to the document as an object that you will be messing with programmatically.
+
+**MINIDOM Example**
