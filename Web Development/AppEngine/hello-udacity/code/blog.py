@@ -7,6 +7,7 @@ functional blog using webapp2, built on Google App Engine, with a SQLite backend
 from code.cookie import make_secure_val, check_secure_val
 from code.handler import Handler
 from google.appengine.ext import db
+from google.appengine.ext import memcache
 import cgi
 import json
 import hashlib
@@ -20,6 +21,11 @@ class Post(db.Model):
 class User(db.Model):
     user = db.StringProperty(required = True)
     pw = db.StringProperty(required = True)
+
+
+def get_posts(update = False):
+    key = 'posts'
+    posts = memcache.get(key)
 
 class BlogHandler(Handler):
     def render_page(self):
