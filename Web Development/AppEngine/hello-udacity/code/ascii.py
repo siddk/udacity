@@ -41,10 +41,15 @@ def gmaps_img(points):
     temp_url = temp_url[:-1]
     return temp_url
 
+CACHE = {}
+def top_arts():
+    arts = db.GqlQuery("SELECT * FROM Art ORDER BY created DESC LIMIT 10")
+    arts = list(arts)
+    return arts
+
 class AsciiChanHandler(Handler):
     def render_page(self, title="", art="", error=""):
-        arts = db.GqlQuery("SELECT * FROM Art ORDER BY created DESC LIMIT 10")
-        arts = list(arts)
+        arts = top_arts()
 
         # Find which arts have coords
         points = []
