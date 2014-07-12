@@ -43,8 +43,14 @@ def gmaps_img(points):
 
 CACHE = {}
 def top_arts():
-    arts = db.GqlQuery("SELECT * FROM Art ORDER BY created DESC LIMIT 10")
-    arts = list(arts)
+    key = 'top'
+    if key in CACHE:
+        arts = CACHE[key]
+    else:
+        arts = db.GqlQuery("SELECT * FROM Art ORDER BY created DESC LIMIT 10")
+        arts = list(arts)
+        CACHE[key] = arts
+
     return arts
 
 class AsciiChanHandler(Handler):
