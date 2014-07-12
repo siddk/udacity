@@ -82,6 +82,7 @@ class AsciiChanHandler(Handler):
             if coords:
                 a.coords = coords
             a.put()
+            CACHE.clear()
 
             self.redirect("/unit3/asciichan")
         else:
