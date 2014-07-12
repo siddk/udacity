@@ -67,7 +67,8 @@ class PostHandler(Handler):
         if subject and post:
             p = Post(subject = subject, post = post)
             p_key = p.put()
-
+            time.sleep(.1)
+            get_posts(True)
             self.redirect("/blog/%d" % p_key.id())
         else:
             error = "We need both a subject and a post!"
@@ -80,12 +81,10 @@ class JSONHandler(Handler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.out.write(json.dumps(lst))
 
-
 class PermalinkHandler(BlogHandler):
     def get(self, post_id):
         s = Post.get_by_id(int(post_id))
         self.render("blog.html", posts = [s])
-
 
 class PermalinkJSONHandler(Handler):
     def get(self, post_id):
