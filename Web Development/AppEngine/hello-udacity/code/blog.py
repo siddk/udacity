@@ -35,11 +35,11 @@ def get_posts(update = False):
         post_lst = list(post_lst)
         timer = time.time()
         memcache.set(key, (post_lst, timer))
-        return (post_lst, 0)
+        return (post_lst, 0.1)
 
     else:
         post_lst = posts[0]
-        update_time = math.floor((time.time()) - posts[1])
+        update_time = (time.time()) - posts[1]
         return (post_lst, update_time)
 
 
@@ -101,6 +101,10 @@ class PermalinkHandler(BlogHandler):
         s, secs = get_permalink(post_id)
         self.render("blog.html", posts = [s], secs = secs)
 
+class FlushHandler(Handler):
+    def get(self):
+        memcache.flush_all()
+        # self.redirect("/blog")
 
 class PermalinkJSONHandler(Handler):
     def get(self, post_id):
