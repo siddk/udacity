@@ -90,7 +90,7 @@ def get_permalink(post_id):
         p_elem = Post.get_by_id(int(post_id))
         timer = time.time()
         memcache.set(key, (p_elem, timer))
-        return ([p_elem], 0)
+        return (p_elem, 0)
     else:
         p_elem = p[0]
         update_time = math.floor((time.time()) - p[1])
@@ -98,8 +98,8 @@ def get_permalink(post_id):
 
 class PermalinkHandler(BlogHandler):
     def get(self, post_id):
-        s, secs = get_posts
-        self.render("blog.html", posts = s, secs = secs)
+        s, secs = get_permalink(post_id)
+        self.render("blog.html", posts = [s], secs = secs)
 
 class PermalinkJSONHandler(Handler):
     def get(self, post_id):
