@@ -9,6 +9,7 @@ from code.handler import Handler
 from google.appengine.ext import db
 from google.appengine.ext import memcache
 import cgi
+import datetime
 import json
 import hashlib
 import re
@@ -25,7 +26,21 @@ class User(db.Model):
 
 def get_posts(update = False):
     key = 'posts'
+    now_time = datetime.utcnow()
     posts = memcache.get(key)
+
+    if posts is None or update:
+        post_lst = db.GqlQuery("SELECT * FROM Post ORDER BY created DESC")
+        post_lst = list(post_lst)
+        time = datetime.utcnow()
+        memcache.set(key, (post_lst, time))
+        return (post_lst, 0)
+
+    else:
+        post_lst = posts[0]
+        update_time = abs(posts[1] - (datetime.utcnow()))
+        return (post_lst, update_time)
+
 
 class BlogHandler(Handler):
     def render_page(self):
