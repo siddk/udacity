@@ -86,3 +86,12 @@ When a user submits a request ot ASCIIChan, the following happens:
 4. Render the HTML (also a stop-gap)
 
 We will be focusing on the second option for the time being. To optimize the database queries, we will be using queries.
+
+##Memcached##
+Memcached is a very fast in-memory cache, written by Danja, for the website LiveJournal.
+
+Everybody uses memcached:
+    + Facebook
+    + Reddit
+    + Youtube
+    + Twitter
