@@ -42,9 +42,9 @@ def gmaps_img(points):
     return temp_url
 
 CACHE = {}
-def top_arts():
+def top_arts(update = False):
     key = 'top'
-    if key in CACHE:
+    if not update and key in CACHE:
         arts = CACHE[key]
     else:
         arts = db.GqlQuery("SELECT * FROM Art ORDER BY created DESC LIMIT 10")
@@ -82,7 +82,7 @@ class AsciiChanHandler(Handler):
             if coords:
                 a.coords = coords
             a.put()
-            CACHE.clear()
+            top_arts(True)
 
             self.redirect("/unit3/asciichan")
         else:
