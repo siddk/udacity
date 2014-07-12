@@ -15,3 +15,12 @@ So far, we have been dealing with a small user base, and as such, we have been u
 4. Storage
 
 We can scale across all four of these objects, though the scale-case varies depending on individual need.
+
+##Techniques for Scaling##
+
+1. The first option is to always look at optimizing your code. (Opportunity cost between developer time, and the cost of a machine).
+2. **Cache Complex Operations** --> This is what we should do
+3. Upgrade Machines
+    + More memory
+    + More disk space
+    + Faster CPU
