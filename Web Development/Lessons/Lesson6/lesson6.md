@@ -95,3 +95,8 @@ Everybody uses memcached:
     + Reddit
     + Youtube
     + Twitter
+
+Works just like a dictionary (hash table), as a key-value storage system. Here are the basic functions:
+    + set(key, value)
+    + get(key) -> value
+    + delete(key)
