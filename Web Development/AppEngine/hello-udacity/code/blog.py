@@ -7,12 +7,13 @@ functional blog using webapp2, built on Google App Engine, with a SQLite backend
 from code.cookie import make_secure_val, check_secure_val
 from code.handler import Handler
 from google.appengine.ext import db
-from google.appengine.ext import memcache
+from google.appengine.api import memcache
 import cgi
-import datetime
 import json
 import hashlib
+import math
 import re
+import time
 
 class Post(db.Model):
     subject = db.StringProperty(required = True)
@@ -26,19 +27,19 @@ class User(db.Model):
 
 def get_posts(update = False):
     key = 'posts'
-    now_time = datetime.utcnow()
+    now_time = time.time()
     posts = memcache.get(key)
 
     if posts is None or update:
         post_lst = db.GqlQuery("SELECT * FROM Post ORDER BY created DESC")
         post_lst = list(post_lst)
-        time = datetime.utcnow()
-        memcache.set(key, (post_lst, time))
+        timer = time.time()
+        memcache.set(key, (post_lst, timer))
         return (post_lst, 0)
 
     else:
         post_lst = posts[0]
-        update_time = abs(posts[1] - (datetime.utcnow()))
+        update_time = math.floor((time.time()) - posts[1])
         return (post_lst, update_time)
 
 
