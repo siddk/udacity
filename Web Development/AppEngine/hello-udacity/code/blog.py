@@ -44,8 +44,10 @@ def get_posts(update = False):
 
 class BlogHandler(Handler):
     def render_page(self):
-        posts = db.GqlQuery("SELECT * FROM Post ORDER BY created DESC")
-        self.render("blog.html", posts = posts)
+        posts = get_posts()
+        secs = posts[1]
+        posts = posts[0]
+        self.render("blog.html", posts = posts, secs = secs)
 
     def get(self):
         self.render_page()
