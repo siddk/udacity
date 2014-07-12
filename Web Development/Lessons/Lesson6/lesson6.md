@@ -84,3 +84,5 @@ When a user submits a request ot ASCIIChan, the following happens:
 2. Query the database --> This is the redundancy we can cut out
 3. Collate the results (sort)
 4. Render the HTML (also a stop-gap)
+
+We will be focusing on the second option for the time being.
