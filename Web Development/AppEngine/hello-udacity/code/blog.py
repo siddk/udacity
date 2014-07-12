@@ -83,10 +83,23 @@ class JSONHandler(Handler):
 
 def get_permalink(post_id):
     key = post_id
+    now_time = time.time()
+    p = memcache.get(key)
+
+    if p is None:
+        p_elem = Post.get_by_id(int(post_id))
+        timer = time.time()
+        memcache.set(key, (p_elem, timer))
+        return ([p_elem], 0)
+    else:
+        p_elem = p[0]
+        update_time = math.floor((time.time()) - p[1])
+        return (p_elem, update_time)
+
 class PermalinkHandler(BlogHandler):
     def get(self, post_id):
-        s = Post.get_by_id(int(post_id))
-        self.render("blog.html", posts = [s])
+        s, secs = get_posts
+        self.render("blog.html", posts = s, secs = secs)
 
 class PermalinkJSONHandler(Handler):
     def get(self, post_id):
