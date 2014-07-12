@@ -109,6 +109,9 @@
                 </div>
             </div>
         {% endfor %}
-        <div class="time-since">Queried {{secs}} seconds ago</div>
+
+        {% if secs %}
+            <div class="time-since">Queried {{secs}} seconds ago</div>
+        {% endif %}
     </body>
 </html>
