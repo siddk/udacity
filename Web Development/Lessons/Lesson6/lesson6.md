@@ -76,3 +76,11 @@ start_time = time.time()
 print cached_computation(5, 3)
 print "the first computation took %f seconds" % (time.time() - start_time)
 ```
+
+##Scaling ASCIIChan##
+When a user submits a request ot ASCIIChan, the following happens:
+
+1. Our web application processes the request (HTTP, URL, Handler)
+2. Query the database --> This is the redundancy we can cut out
+3. Collate the results (sort)
+4. Render the HTML (also a stop-gap)
