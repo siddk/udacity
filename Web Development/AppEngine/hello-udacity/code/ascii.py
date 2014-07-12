@@ -5,6 +5,7 @@ Sample web application to demonstrate basic databases in Google App Engine.
 Mockup of the website 4chan, asciiChan, a platform to share asciiArt.
 """
 from google.appengine.ext import db
+from google.appengine.ext import memcache
 from code.handler import Handler
 import urllib2
 from xml.dom import minidom
@@ -41,15 +42,13 @@ def gmaps_img(points):
     temp_url = temp_url[:-1]
     return temp_url
 
-CACHE = {}
 def top_arts(update = False):
     key = 'top'
-    if not update and key in CACHE:
-        arts = CACHE[key]
-    else:
+    arts = memcache.get(key)
+    if arts is None or update:
         arts = db.GqlQuery("SELECT * FROM Art ORDER BY created DESC LIMIT 10")
         arts = list(arts)
-        CACHE[key] = arts
+        memcache.set(key, arts)
 
     return arts
 
