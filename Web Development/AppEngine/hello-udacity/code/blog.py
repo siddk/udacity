@@ -81,6 +81,8 @@ class JSONHandler(Handler):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.out.write(json.dumps(lst))
 
+def get_permalink(post_id):
+    key = post_id
 class PermalinkHandler(BlogHandler):
     def get(self, post_id):
         s = Post.get_by_id(int(post_id))
