@@ -5,7 +5,7 @@ Sample web application to demonstrate basic databases in Google App Engine.
 Mockup of the website 4chan, asciiChan, a platform to share asciiArt.
 """
 from google.appengine.ext import db
-from google.appengine.ext import memcache
+from google.appengine.api import memcache
 from code.handler import Handler
 import urllib2
 from xml.dom import minidom
