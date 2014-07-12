@@ -85,4 +85,4 @@ When a user submits a request ot ASCIIChan, the following happens:
 3. Collate the results (sort)
 4. Render the HTML (also a stop-gap)
 
-We will be focusing on the second option for the time being.
+We will be focusing on the second option for the time being. To optimize the database queries, we will be using queries.
