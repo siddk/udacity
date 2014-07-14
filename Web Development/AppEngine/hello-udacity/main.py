@@ -12,10 +12,13 @@ from code.handler import Handler
 from code.rot13 import ROT13Handler
 from code.signup_error import SignupHandler, WelcomeHandler
 from code.template import TemplateHandler, HardCodedTemplateHandler
+from code.wiki import WikiMainPageHandler, WikiSignupHandler, WikiLogin, WikiLogout, EditPage, WikiPageHandler
 import webapp2
 
 class MainHandler(Handler):
     def get(self):
         self.write("Welcome to Sidd's Site for the Udacity Web Development Course CS 253")
 
-app = webapp2.WSGIApplication([('/', MainHandler), ('/unit2/rot13', ROT13Handler), ('/unit2/signup', SignupHandler), ('/unit2/welcome', WelcomeHandler), ('/unit3/hard_coded_templates', HardCodedTemplateHandler), ('/unit3/templates', TemplateHandler), ('/unit3/asciichan', AsciiChanHandler), ('/blog', BlogHandler), ('/blog/.json', JSONHandler), ('/blog/newpost', PostHandler), ('/blog/(\d+)', PermalinkHandler), ('/blog/(\d+).json', PermalinkJSONHandler), ('/blog/signup', BlogSignupHandler), ('/blog/welcome', BlogWelcomeHandler), ('/blog/login', BlogLoginHandler), ('/blog/logout', BlogLogoutHandler), ('/blog/flush', FlushHandler), ('/cookies', CookieHandler)], debug=True)
+PAGE_RE = r'(/(?:[a-zA-Z0-9_-]+/?)*)'
+
+app = webapp2.WSGIApplication([('/', MainHandler), ('/unit2/rot13', ROT13Handler), ('/unit2/signup', SignupHandler), ('/unit2/welcome', WelcomeHandler), ('/unit3/hard_coded_templates', HardCodedTemplateHandler), ('/unit3/templates', TemplateHandler), ('/unit3/asciichan', AsciiChanHandler), ('/blog', BlogHandler), ('/blog/.json', JSONHandler), ('/blog/newpost', PostHandler), ('/blog/(\d+)', PermalinkHandler), ('/blog/(\d+).json', PermalinkJSONHandler), ('/blog/signup', BlogSignupHandler), ('/blog/welcome', BlogWelcomeHandler), ('/blog/login', BlogLoginHandler), ('/blog/logout', BlogLogoutHandler), ('/blog/flush', FlushHandler), ('/cookies', CookieHandler), ('/wiki', WikiMainPageHandler), ('/wiki/signup', WikiSignupHandler), ('/wiki/login', WikiLogin), ('/wiki/logout', WikiLogout), ('/wiki/_edit' + PAGE_RE, EditPage), ('/wiki/' + PAGE_RE, WikiPageHandler)], debug=True)
