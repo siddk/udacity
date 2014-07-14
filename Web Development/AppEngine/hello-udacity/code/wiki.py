@@ -79,7 +79,7 @@ class WikiSignupHandler(Handler):
 
         sts = make_secure_val(u_id)
         self.response.headers.add_header('Set-Cookie', 'visited=%s; Path=/' % sts)
-        self.redirect("/blog/welcome")
+        self.redirect("/wiki")
 
 class WikiLogin(Handler):
     pass
