@@ -18,6 +18,10 @@ class WikiUser(db.Model):
     user = db.StringProperty(required = True)
     pw = db.StringProperty(required = True)
 
+class WikiPage(db.Model):
+    pagename = db.StringProperty(required = True)
+    content = db.StringProperty(required = True)
+
 class WikiMainPageHandler(Handler):
     def render_page(self):
         self.render("wiki.html")
@@ -121,7 +125,39 @@ class WikiLogout(Handler):
         self.redirect("/wiki")
 
 class EditPage(Handler):
-    pass
+    def render_page(self, content = ""):
+        self.render("edit_template.html", content = content)
+
+    def get(self, page_name):
+        pages = get_pages()
+
+        # Render page if exists
+        for p in pages:
+            if p.pagename == page_name:
+                self.render_page(p.content)
+
+        self.render_page()
+
+def get_pages(update = False):
+    key = 'pages'
+    pages = memcache.get(key)
+
+    if pages is None:
+        pages = db.GqlQuery("SELECT * FROM WikiPage")
+        pages = list(pages)
+        memcache.set(key, pages)
+
+    return pages
 
 class WikiPageHandler(Handler):
-    pass
+    def render_page(self, content):
+        self.render("page_template.html", page=content)
+
+    def get(self, page_name):
+        pages = get_pages()
+
+        for p in pages:
+            if p.pagename == page_name:
+                self.render_page(p.content)
+
+        self.redirect('/wiki/_edit' + page_name)
