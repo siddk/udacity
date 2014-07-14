@@ -82,7 +82,33 @@ class WikiSignupHandler(Handler):
         self.redirect("/wiki")
 
 class WikiLogin(Handler):
-    pass
+    def render_page(self, error = "", user_val = "", pass_val = ""):
+        self.render("login.html", error = error, user_val = user_val, pass_val = pass_val)
+
+    def get(self):
+        self.render_page()
+
+    def post(self):
+        username = self.request.get('username')
+        password = self.request.get('password')
+
+        if not (username and password):
+            self.render_page(error = "Missing login info", user_val = username, pass_val = password)
+
+        users = db.GqlQuery("SELECT * FROM User")
+        for user in users:
+            if user.user == username:
+                pw = hashlib.sha256(password).hexdigest()
+
+                if user.pw == pw:
+                    u_key = user.put()
+                    uid = str(u_key.id())
+                    sts = make_secure_val(uid)
+                    self.response.headers.add_header('Set-Cookie', 'visited=%s; Path=/' % sts)
+                    self.redirect("/wiki")
+
+                else:
+                    self.render_page(error = "Invalid login", user_val = username, pass_val = password)
 
 class WikiLogout(Handler):
     pass
