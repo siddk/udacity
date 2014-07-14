@@ -14,7 +14,7 @@ import math
 import re
 import time
 
-class User(db.Model):
+class WikiUser(db.Model):
     user = db.StringProperty(required = True)
     pw = db.StringProperty(required = True)
 
@@ -72,7 +72,7 @@ class WikiSignupHandler(Handler):
                     email_val=cgi.escape(email, quote=True))
                 return
 
-        u = User(user = username, pw = hashlib.sha256(password).hexdigest())
+        u = WikiUser(user = username, pw = hashlib.sha256(password).hexdigest())
         u_key = u.put()
         u_id = str(u_key.id())
 
@@ -91,24 +91,30 @@ class WikiLogin(Handler):
     def post(self):
         username = self.request.get('username')
         password = self.request.get('password')
-
+        rendered = False
         if not (username and password):
             self.render_page(error = "Missing login info", user_val = username, pass_val = password)
 
-        users = db.GqlQuery("SELECT * FROM User")
-        for user in users:
-            if user.user == username:
-                pw = hashlib.sha256(password).hexdigest()
+        else:
+            users = db.GqlQuery("SELECT * FROM WikiUser")
+            for user in users:
+                if user.user == username:
+                    pw = hashlib.sha256(password).hexdigest()
 
-                if user.pw == pw:
-                    u_key = user.put()
-                    uid = str(u_key.id())
-                    sts = make_secure_val(uid)
-                    self.response.headers.add_header('Set-Cookie', 'visited=%s; Path=/' % sts)
-                    self.redirect("/wiki")
+                    if user.pw == pw:
+                        u_key = user.put()
+                        uid = str(u_key.id())
+                        sts = make_secure_val(uid)
+                        self.response.headers.add_header('Set-Cookie', 'visited=%s; Path=/' % sts)
+                        self.redirect("/wiki")
 
-                else:
-                    self.render_page(error = "Invalid login", user_val = username, pass_val = password)
+                    else:
+                        self.render_page(error = "Invalid login", user_val = username, pass_val = password)
+                        rendered = True
+
+            if not rendered:
+                self.render_page(error = "User does not exist, signup!", user_val = username, pass_val = password)
+
 
 class WikiLogout(Handler):
     pass
