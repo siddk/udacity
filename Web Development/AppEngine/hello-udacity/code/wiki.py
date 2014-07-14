@@ -115,9 +115,10 @@ class WikiLogin(Handler):
             if not rendered:
                 self.render_page(error = "User does not exist, signup!", user_val = username, pass_val = password)
 
-
 class WikiLogout(Handler):
-    pass
+    def get(self):
+        self.response.headers.add_header('Set-Cookie', 'visited=%s; Path=/' % "")
+        self.redirect("/wiki")
 
 class EditPage(Handler):
     pass
